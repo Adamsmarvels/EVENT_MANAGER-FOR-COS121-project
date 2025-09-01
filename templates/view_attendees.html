@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Event Attendees{% endblock %}
+
+{% block content %}
+<h2>Attendees for "{{ event.title }}"</h2>
+
+{% if attendees %}
+    <ul>
+    {% for user in attendees %}
+        <li>{{ user.username }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No one has signed up for this event yet.</p>
+{% endif %}
+
+<a href="{{ url_for('dashboard') }}" class="btn secondary">Back to Dashboard</a>
+{% endblock %}
