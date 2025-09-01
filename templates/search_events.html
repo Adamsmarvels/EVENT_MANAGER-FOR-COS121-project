@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Search Events{% endblock %}
+
+{% block content %}
+<h2>Search Results</h2>
+
+{% if query %}
+    <p>Results for: <strong>{{ query }}</strong></p>
+{% endif %}
+
+{% if events %}
+    <ul class="event-list">
+        {% for event in events %}
+        <li class="event-card">
+            <strong>{{ event.title }}</strong><br>
+            <span>{{ event.date.strftime('%d/%m/%Y') }} at {{ event.location }}</span>
+            <p>{{ event.description }}</p>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('signup_event', event_id=event.id) }}" class="btn signup-btn">Sign Up</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn signup-btn">Login to Sign Up</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p class="no-events">No events found matching your search.</p>
+{% endif %}
+
+<a href="{{ url_for('dashboard') }}" class="btn secondary">Back to Dashboard</a>
+{% endblock %}
