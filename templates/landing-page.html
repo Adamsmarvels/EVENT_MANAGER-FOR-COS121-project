@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Welcome - Mini Event Manager{% endblock %}
+
+{% block content %}
+<div class="landing-container">
+  <header class="landing-header">
+    <h1>Welcome to Mini Event Manager 🎉</h1>
+    <p>Create, manage, and join amazing events with ease.</p>
+    <div class="landing-buttons">
+      <a href="{{ url_for('register') }}" class="btn btn-primary">Get Started</a>
+      <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+    </div>
+  </header>
+
+  <section class="features">
+    <h2>Why Choose Us?</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>🚀 Easy Event Creation</h3>
+        <p>Organize events in just a few clicks.</p>
+      </div>
+      <div class="feature">
+        <h3>🎟️ Ticket & Registration</h3>
+        <p>Handle attendees and ticketing with no hassle.</p>
+      </div>
+      <div class="feature">
+        <h3>📢 Promote Your Events</h3>
+        <p>Share easily through social media and email.</p>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
