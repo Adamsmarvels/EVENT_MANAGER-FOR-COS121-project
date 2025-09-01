@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
@@ -6,10 +7,11 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+import logging
 
 # ---------------- App Setup ----------------
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "fallback_secret_key")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", os.urandom(24))  # Secure fallback
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/events.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -98,6 +100,9 @@ def create_event():
     if request.method == "POST":
         title = request.form.get("title")
         description = request.form.get("description")
+        if not title or not description:
+            flash("Title and description are required.", "danger")
+            return redirect(url_for("create_event"))
         new_event = Event(title=title, description=description)
         db.session.add(new_event)
         db.session.commit()
@@ -105,8 +110,20 @@ def create_event():
         return redirect(url_for("dashboard"))
     return render_template("create-events.html")
 
-# ---------------- Run ----------------
+# ---------------- Error Handlers ----------------
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('500.html'), 500
+
+# ---------------- Database Initialization ----------------
+with app.app_context():
+    db.create_all()
+
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)
+    # For local development only, use a proper WSGI server in production
+    app.run(host="0.0.0.0", port=5000)
