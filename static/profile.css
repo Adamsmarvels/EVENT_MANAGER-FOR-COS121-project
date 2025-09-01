@@ -1,0 +1,75 @@
+/* Profile Page Styles */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f9;
+  color: #333;
+}
+
+/* Profile container */
+.profile-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Profile picture */
+.profile-pic {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #007bff;
+  margin-bottom: 20px;
+}
+
+/* User name */
+.profile-container h2 {
+  margin: 10px 0 5px;
+  color: #007bff;
+}
+
+/* Bio / About */
+.profile-container p {
+  font-size: 15px;
+  margin: 10px 0;
+  color: #666;
+}
+
+/* Info cards */
+.info-card {
+  background: #f9fbfd;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin: 15px 0;
+  text-align: left;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.info-card strong {
+  color: #333;
+}
+
+/* Edit Profile button */
+.btn-edit {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 18px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-edit:hover {
+  background: #0056b3;
+}
