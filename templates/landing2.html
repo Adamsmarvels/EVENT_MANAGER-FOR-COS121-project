@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Mini Event Manager{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Plan. Discover. Join Events Effortlessly</h1>
+    <p>Easily create, manage, and attend events in just a few clicks.</p>
+    <div class="hero-buttons">
+        <a href="{{ url_for('list_events') }}" class="btn primary">Browse Events</a>
+        <a href="{{ url_for('create_event') }}" class="btn secondary">Create Event</a>
+    </div>
+</section>
+
+<section class="features">
+    <h2>Why Mini Event Manager?</h2>
+    <div class="feature-list">
+        <div class="feature">
+            <h3>✅ Discover Local Events</h3>
+            <p>Find events tailored to your interests and location.</p>
+        </div>
+        <div class="feature">
+            <h3>🎟 One-Click Registration</h3>
+            <p>Secure your spot at events quickly and safely.</p>
+        </div>
+        <div class="feature">
+            <h3>📅 Create & Manage Events</h3>
+            <p>Organizers can manage attendees and details with ease.</p>
+        </div>
+        <div class="feature">
+            <h3>🔔 Never Miss an Event</h3>
+            <p>Get reminders for your upcoming events automatically.</p>
+        </div>
+    </div>
+</section>
+
+<section class="upcoming-events">
+    <h2>Upcoming Events</h2>
+    <ul class="event-list">
+        {% for event in events[:3] %}
+        <li class="event-card">
+            <strong>{{ event.title }}</strong><br>
+            <span>{{ event.date.strftime('%d/%m/%Y') }} at {{ event.location }}</span>
+            <p>{{ event.description }}</p>
+            <a href="{{ url_for('signup_event', event_id=event.id) }}" class="btn small">Sign Up</a>
+        </li>
+        {% else %}
+        <p>No events available at the moment.</p>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="testimonials">
+    <h2>What People Are Saying</h2>
+    <div class="testimonial-list">
+        <blockquote>
+            "I’ve never missed a school event since I started using Mini Event Manager!"
+            <footer>– Sarah, Student</footer>
+        </blockquote>
+        <blockquote>
+            "Organizing events is now so easy."
+            <footer>– Mr. James, Faculty</footer>
+        </blockquote>
+    </div>
+</section>
+
+<section class="about">
+    <h2>About Mini Event Manager</h2>
+    <p>We help students and communities stay connected. Plan, manage, or attend events effortlessly.</p>
+</section>
+
+<section class="final-cta">
+    <h2>Ready to join your next event?</h2>
+    <a href="{{ url_for('register') }}" class="btn primary">Get Started Now</a>
+</section>
+{% endblock %}
