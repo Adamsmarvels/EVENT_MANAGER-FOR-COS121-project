@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Mini Event Manager{% endblock %}
+
+{% block content %}
+  <h1>Welcome, {{ current_user.username }}!</h1>
+
+  <p>Here are your events:</p>
+
+  {% if events %}
+    <ul class="event-list">
+      {% for event in events %}
+        <li>
+          <strong>{{ event.title }}</strong> - {{ event.date.strftime("%Y-%m-%d") }}
+          <br>
+          {{ event.description }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No events created yet. <a href="{{ url_for('create_event') }}">Create one</a>.</p>
+  {% endif %}
+{% endblock %}
